@@ -8,10 +8,13 @@ import {
     Rubik_Mono_One,
     Silkscreen,
     Sixtyfour_Convergence,
-    Ubuntu_Mono
+    Ubuntu_Mono, VT323
 } from 'next/font/google';
 import myImage from '../../public/my_image.png'
 import Link from "next/link";
+import SkillTrail from "@/components/skilltrail/SkillTrail";
+import CoreSkillSection from "@/components/coreskillsection/coreskillsection";
+import Timeline from "@/components/timeline/Timeline";
 
 const openSans = Roboto({
     subsets: ['latin'],
@@ -22,9 +25,9 @@ const sixtyfourConvergence = Sixtyfour_Convergence({
     subsets: ['latin']
 });
 
-const ubuntuMono = Ubuntu_Mono({
+const ubuntuMono = VT323({
     subsets: ['latin'],
-    weight:["400","700"]
+    weight:["400"]
 });
 
 
@@ -33,41 +36,98 @@ const silkscreen = Silkscreen({
     weight:["400","700"]
 });
 
-export default function Home() {
-  return (
-    <div >
-      <main >
-          <div className={`${ubuntuMono.className} w-full h-64 md:h-[50vh] lg:h-screen`}>
-              <WaterView>
-                  <div className={` flex h-full`}>
-                      <img src={myImage.src} className={"absolute h-full"}/>
-                      <div className={"h-full w-full flex items-center justify-center"}>
-                          <div className=" p-4 lg:p-8 bg-black/[0.8]  h-full md:h-auto ml-20 pl-10 md:pl-40 md:w-2/3 lg:pl-44 md:mt-32 lg:mt-64 lg:rounded-lg">
-                              <div className={"md:relative flex flex-col justify-end md:justify-start items-end md:items-start"}>
-                                  <h4 className={"text-xs lg:text-5xl font-bold"}>Hello!</h4>
-                                  <h4 className="text-xs lg:text-5xl lg:mt-4">I’m Akash Shahriar,</h4>
-                                  <h4 className={"text-gray-300 text-xs lg:text-xl lg:my-4 text-right md:text-left"}> a <span
-                                      className={`${silkscreen.className} text-red-700 bg-black lg:p-1`}>software engineer</span> based
-                                      in <Link href="https://en.wikipedia.org/wiki/Bangladesh" target="_blank" className={"font-bold "}>Bangladesh</Link>.
-                                      Whether you're here to learn more about my work, share a passion for coding,
-                                      or
-                                      explore the possibility of working together—welcome! You’ve landed in the right
-                                      place.
-                                      Nice
-                                      to
-                                      meet you!</h4>
 
-                                  <div
-                                      className={"flex flex-col md:w-full md:flex-row gap-2 lg:gap-4 pt-4 md:justify-between lg:mr-8"}>
-                                      <button
-                                          className="flex-none btn btn-xs text-xs lg:text-lg lg:btn-md backdrop-blur-md bg-white/30 text-black hover:text-red-700 hover:bg-white group">
-                                          Download Resume
-                                          <svg className="h-3 w-3 lg:h-6 lg:w-6 fill-black  group-hover:fill-red-700"
-                                               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                                              <g id="SVGRepo_tracerCarrier" strokeLinecap="round"
-                                                 strokeLinejoin="round"></g>
-                                              <g id="SVGRepo_iconCarrier">
+function Introduction({classname} :{classname: string}) {
+    return (
+        <p className={classname}>
+                              <span className={"font-bold"}>
+                                  Welcome to my digital playground!
+                              </span>
+            <br/> <br/>
+            I’m Nasib Shahriar Akash, an Android Engineer and full-stack mobile
+            developer with over five years of experience creating exceptional, user-focused mobile
+            applications. My passion lies in turning complex ideas into sleek, high-performance
+            solutions
+            that
+            elevate user engagement and drive business growth.<br/>
+            <br/>
+            Are you looking for a developer who knows the ins and outs of Android SDK, Kotlin
+            Multiplatform
+            Mobile (KMM), and Flutter SDK? Look no further. I’ve led projects that have significantly
+            boosted
+            app performance and user retention, using clean architecture, efficient state management,
+            and
+            secure, multi-module setups. I leverage cutting-edge tools like Jetpack Compose, CameraX,
+            and
+            advanced data encryption to keep apps modern, scalable, and lightning-fast.<br/>
+            <br/>
+            But I don’t just stop at traditional app development—I’m also deeply fascinated by Machine
+            Learning (ML), Artificial Intelligence (AI), Image Processing, and Natural Language
+            Processing
+            (NLP). Imagine apps that don’t just respond to users but understand and predict their
+            needs.
+            From
+            developing intelligent conversational agents to crafting gesture recognition features, I’m
+            all
+            about taking your app to the next level with AI and smart tech integration.<br/>
+            <br/>
+            Efficiency is my game, and I excel at deploying projects rapidly and reliably through
+            CI/CD
+            best
+            practices. Whether collaborating in agile environments or integrating state-of-the-art
+            features,
+            I’m committed to delivering software that leaves an impact.<br/>
+            <br/>
+            Ready to bring your vision to life with an app that’s as powerful as it is elegant? Let’s
+            connect
+            and make something extraordinary together!
+        </p>
+    );
+}
+
+export default function Home() {
+    const elements = []
+    for (let i = 0; i < 200; i++) {
+        elements.push(<p>{i}</p>);
+    }
+    return (
+        <div>
+            <main>
+                <div className={`${ubuntuMono.className} w-full h-64 md:h-[50vh] lg:h-screen`}>
+                    <WaterView>
+                        <div className={` flex h-full`}>
+                            <img src={myImage.src} className={"absolute h-full"}/>
+                            <div className={"h-full w-full flex items-center justify-center"}>
+                                <div
+                                    className=" p-4 lg:p-8 bg-black/[0.8]  h-full md:h-auto ml-20 pl-10 md:pl-40 md:w-2/3 lg:pl-44 md:mt-32 lg:mt-64 lg:rounded-lg">
+                                    <div
+                                        className={"md:relative flex flex-col justify-end md:justify-start items-end md:items-start"}>
+                                        <h4 className={"text-xs lg:text-5xl font-bold"}>Hello!</h4>
+                                        <h4 className="text-xs lg:text-5xl lg:mt-4">I’m Nasib Shahriar Akash,</h4>
+                                        <h4 className={"text-gray-300 text-xs lg:text-xl lg:my-4 text-right md:text-left"}> a <span
+                                            className={`${silkscreen.className} text-red-700 bg-black lg:p-1`}>software engineer</span> based
+                                            in <Link href="https://en.wikipedia.org/wiki/Bangladesh" target="_blank"
+                                                     className={"font-bold "}>Bangladesh</Link>.
+                                            Whether you're here to learn more about my work, share a passion for coding,
+                                            or
+                                            explore the possibility of working together—welcome! You’ve landed in the
+                                            right
+                                            place.
+                                            Nice
+                                            to
+                                            meet you!</h4>
+                                        <div
+                                            className={"flex flex-col md:w-full md:flex-row gap-2 lg:gap-4 pt-4 md:justify-between lg:mr-8"}>
+                                            <button
+                                                className="flex-none btn btn-xs text-xs lg:text-lg lg:btn-md backdrop-blur-md bg-white/30 text-black hover:text-red-700 hover:bg-white group">
+                                                Download Resume
+                                                <svg
+                                                    className="h-3 w-3 lg:h-6 lg:w-6 fill-black  group-hover:fill-red-700"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round"
+                                                       strokeLinejoin="round"></g>
+                                                    <g id="SVGRepo_iconCarrier">
                                                   <path
                                                       d="M12.5535 16.5061C12.4114 16.6615 12.2106 16.75 12 16.75C11.7894 16.75 11.5886 16.6615 11.4465 16.5061L7.44648 12.1311C7.16698 11.8254 7.18822 11.351 7.49392 11.0715C7.79963 10.792 8.27402 10.8132 8.55352 11.1189L11.25 14.0682V3C11.25 2.58579 11.5858 2.25 12 2.25C12.4142 2.25 12.75 2.58579 12.75 3V14.0682L15.4465 11.1189C15.726 10.8132 16.2004 10.792 16.5061 11.0715C16.8118 11.351 16.833 11.8254 16.5535 12.1311L12.5535 16.5061Z"></path>
                                                   <path
@@ -104,76 +164,39 @@ export default function Home() {
                                                     d="M10.187 0 8.142 2.04l3.782 3.769-8.174 8.153L13.815 24l2.044-2.039-3.781-3.771 8.172-8.152L10.187 0zm-.663 15.542-1.226-1.26-.002-.013 6.081-6.063 1.226 1.223-6.079 6.113z"></path>
                                           </svg>
                                       </Link>
-
-
                                   </div>
-
                               </div>
-
                           </div>
-
-
                       </div>
-
-
                   </div>
               </WaterView>
           </div>
 
-          <div className={`${ubuntuMono.className} flex w-full`}>
-              <div className="flex flex-row p-4">
-                  <div className={"basis-2/3 p-8"}>
-                      <p className={"text-xl"}>
-                          <span className={"font-bold"}>
-                              Welcome to my digital playground!
-                          </span>
-                          <br/> <br/>
-                          I’m Akash Shahriar, an Android Engineer and full-stack mobile
-                          developer with over five years of experience creating exceptional, user-focused mobile
-                          applications. My passion lies in turning complex ideas into sleek, high-performance solutions
-                          that
-                          elevate user engagement and drive business growth.<br/>
-                          <br/>
-                          Are you looking for a developer who knows the ins and outs of Android SDK, Kotlin
-                          Multiplatform
-                          Mobile (KMM), and Flutter SDK? Look no further. I’ve led projects that have significantly
-                          boosted
-                          app performance and user retention, using clean architecture, efficient state management, and
-                          secure, multi-module setups. I leverage cutting-edge tools like Jetpack Compose, CameraX, and
-                          advanced data encryption to keep apps modern, scalable, and lightning-fast.<br/>
-                          <br/>
-                          But I don’t just stop at traditional app development—I’m also deeply fascinated by Machine
-                          Learning (ML), Artificial Intelligence (AI), Image Processing, and Natural Language Processing
-                          (NLP). Imagine apps that don’t just respond to users but understand and predict their needs.
-                          From
-                          developing intelligent conversational agents to crafting gesture recognition features, I’m all
-                          about taking your app to the next level with AI and smart tech integration.<br/>
-                          <br/>
-                          Efficiency is my game, and I excel at deploying projects rapidly and reliably through CI/CD
-                          best
-                          practices. Whether collaborating in agile environments or integrating state-of-the-art
-                          features,
-                          I’m committed to delivering software that leaves an impact.<br/>
-                          <br/>
-                          Ready to bring your vision to life with an app that’s as powerful as it is elegant? Let’s
-                          connect
-                          and make something extraordinary together!
-                      </p>
-                  </div>
-                  <div className="divider divider-horizontal divider-start">
-                      <div className="badge badge-outline">Skill</div>
-                  </div>
+          <div className="flex overflow-hidden h-fit">
+              <div className="flex-none flex">
+                  <div className="text-right text-sm md:text-xl text-gray-500">{elements}</div>
+                  <div className="divider divider-horizontal p-0 m-0"></div>
+              </div>
 
-                  <div className={"basis-1/3"}>
-
+              <div className={"grow overflow-x-auto"} >
+                  <div className="md:flex md:flex-row p-2 md:p-8 overflow-x-auto ">
+                      <div className={"md:px-4 h-fit"}>
+                          <Introduction classname={"text-sm md:text-xl"}/>
+                      </div>
+                      <div className={"py-4 md:py-0 h-full"}>
+                          <CoreSkillSection/>
+                      </div>
                   </div>
-
+                  <SkillTrail />
+                  <Timeline />
               </div>
           </div>
-      </main>
-        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
 
-        </footer>
-    </div>
-  );
+
+            </main>
+            <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+
+            </footer>
+        </div>
+    );
 }
