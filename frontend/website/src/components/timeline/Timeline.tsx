@@ -1,22 +1,31 @@
 "use client"
-import {data} from "jquery";
-import {ImageTrail} from "@/components/imagetrail/ImageTrail";
+import { data } from "jquery";
+import { ImageTrail } from "@/components/imagetrail/ImageTrail";
 
-interface TimeLineImage{
+
+interface Url {
+    label: string;
+    href: string;
+}
+
+interface TimeLineImage {
     src: string;
     alt: string;
 }
 
-interface TimeLineData{
+interface TimeLineData {
     date: string;
     title: string;
     description: string;
+    urls: Url[];
     images: TimeLineImage[];
 }
 
 
-function TimeLineItem(props:{data:TimeLineData,index:number}){
+function TimeLineItem(props: { data: TimeLineData, index: number }) {
     const duplicatedImages = [...props.data.images, ...props.data.images];
+
+    const isLeft = props.index % 2 === 0;
 
     return (
         <li>
@@ -29,51 +38,111 @@ function TimeLineItem(props:{data:TimeLineData,index:number}){
                     <path
                         fillRule="evenodd"
                         d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                        clipRule="evenodd"/>
+                        clipRule="evenodd" />
                 </svg>
             </div>
-            <div className="timeline-start mb-10 md:text-end">
+            <div className={
+                isLeft
+                    ? "timeline-start mb-10 md:text-end" // left aligned styling
+                    : "timeline-end mb-10 md:text-start" // right aligned styling
+            }>
                 <time className="font-mono italic">{props.data.date}</time>
                 <div className="text-lg font-black">{props.data.title}</div>
+                <div className="mt-2">
+                    {props.data.urls.map((url, idx) => (
+                        <a
+                            key={idx}
+                            href={url.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link link-primary mr-2"
+                        >
+                            {url.label || url.href}
+                        </a>
+                    ))}
+                </div>
                 {props.data.description}
-                <ImageTrail images={props.data.images} height={300} width={180}/>
+                <ImageTrail images={props.data.images} height={300} width={180} />
             </div>
 
-            <hr/>
+            <hr />
         </li>
     )
 }
 
 export default function Timeline(props: {}) {
-    const timeLineItems:TimeLineData[] = [
+    const timeLineItems: TimeLineData[] = [
         {
-            date:"2024",
-            title:"Portonics Ltd. ( Full Time - Remote )\n"+ " Toptal ( Part Time - Remote ) ",
-            description:"The Apple Macintosh—later rebranded as the Macintosh 128K—is the original Apple Macintosh\n" +
-                "                        personal computer. It played a pivotal role in establishing desktop publishing as a general\n" +
-                "                        office function. The motherboard, a 9 in (23 cm) CRT monitor, and a floppy drive were housed\n" +
-                "                        in a beige case with integrated carrying handle; it came with a keyboard and single-button\n" +
-                "                        mouse.",
-            images:[
+            date: "February,2024",
+            title: "Hey Ana - A personal ai assistant",
+            description: "Hey Ana is a personal ai assistant that helps you with your daily tasks. It can help you with\n" +
+                "                        your daily tasks, remind you of important events, and even help you with your work. It is\n" +
+                "                        designed to be easy to use and understand, and it can be customized to suit your needs.",
+            urls: [
                 {
-                    src:"https://picsum.photos/400/200",
-                    alt:"Picture"
+                    label:"heyana.ai",
+                    href: "https://heyana.ai"
+                }
+            ],
+            images: [
+                {
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
                 },
                 {
-                    src:"https://picsum.photos/400/200",
-                    alt:"Picture"
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
                 },
                 {
-                    src:"https://picsum.photos/400/200",
-                    alt:"Picture"
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
                 },
                 {
-                    src:"https://picsum.photos/400/200",
-                    alt:"Picture"
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
                 },
                 {
-                    src:"https://picsum.photos/400/200",
-                    alt:"Picture"
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
+                }
+            ]
+        },
+        {
+            date: "February,2024",
+            title: "Pitchle - A platform for startups and investors",
+
+            description: "Pitchle is a pioneering social network focused on business, while also serving as a platform for promoting products through short 30 or 60-second videos" +
+                "\n Pitchle facilitates finding partners, and investors, buying or transferring businesses, and promoting products with a sophisticated and contemporary touch.",
+            urls: [
+                {
+                    label: "Pitchle - Android",
+                    href: "https://play.google.com/store/apps/details?id=com.pitchle.pitchleApp"
+                },
+                {
+                    label: "Pitchle - iOS",
+                    href: "https://apps.apple.com/us/app/pitchle/id6677026938"
+                }
+            ],
+            images: [
+                {
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
+                },
+                {
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
+                },
+                {
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
+                },
+                {
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
+                },
+                {
+                    src: "https://picsum.photos/400/200",
+                    alt: "Picture"
                 }
             ]
         }
@@ -81,7 +150,8 @@ export default function Timeline(props: {}) {
     return (
         <div>
             <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
-                <TimeLineItem data={timeLineItems[0]} index={0}/>
+                <TimeLineItem data={timeLineItems[0]} index={0} />
+                <TimeLineItem data={timeLineItems[1]} index={1} />
                 <li>
                     <hr />
                     <div className="timeline-middle">
@@ -93,7 +163,7 @@ export default function Timeline(props: {}) {
                             <path
                                 fillRule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                clipRule="evenodd"/>
+                                clipRule="evenodd" />
                         </svg>
                     </div>
                     <div className="timeline-end mb-10">
@@ -103,10 +173,10 @@ export default function Timeline(props: {}) {
                         been the primary part of Apple's consumer desktop offerings since its debut in August 1998,
                         and has evolved through seven distinct forms
                     </div>
-                    <hr/>
+                    <hr />
                 </li>
                 <li>
-                    <hr/>
+                    <hr />
                     <div className="timeline-middle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +186,7 @@ export default function Timeline(props: {}) {
                             <path
                                 fillRule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                clipRule="evenodd"/>
+                                clipRule="evenodd" />
                         </svg>
                     </div>
                     <div className="timeline-start mb-10 md:text-end">
@@ -128,10 +198,10 @@ export default function Timeline(props: {}) {
                         million iPod products as of 2022. Apple discontinued the iPod product line on May 10, 2022. At
                         over 20 years, the iPod brand is the oldest to be discontinued by Apple
                     </div>
-                    <hr/>
+                    <hr />
                 </li>
                 <li>
-                    <hr/>
+                    <hr />
                     <div className="timeline-middle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +211,7 @@ export default function Timeline(props: {}) {
                             <path
                                 fillRule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                clipRule="evenodd"/>
+                                clipRule="evenodd" />
                         </svg>
                     </div>
                     <div className="timeline-end mb-10">
@@ -153,10 +223,10 @@ export default function Timeline(props: {}) {
                         of November 1, 2018, more than 2.2 billion iPhones had been sold. As of 2022, the iPhone
                         accounts for 15.6% of global smartphone market share
                     </div>
-                    <hr/>
+                    <hr />
                 </li>
                 <li>
-                    <hr/>
+                    <hr />
                     <div className="timeline-middle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +236,7 @@ export default function Timeline(props: {}) {
                             <path
                                 fillRule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                clipRule="evenodd"/>
+                                clipRule="evenodd" />
                         </svg>
                     </div>
                     <div className="timeline-start mb-10 md:text-end">
