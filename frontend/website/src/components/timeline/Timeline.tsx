@@ -62,7 +62,6 @@ function TimeLineItem(props: { data: TimeLineData, index: number }) {
                     ))}
                 </div>
                 {props.data.description}
-                <ImageTrail images={props.data.images} height={300} width={180} />
             </div>
 
             <hr />

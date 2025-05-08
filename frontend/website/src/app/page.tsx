@@ -174,7 +174,7 @@ export default function Home() {
 
           <div className="flex overflow-hidden h-fit">
               <div className="flex-none flex">
-                  <div className="text-right text-sm md:text-xl text-gray-500">{elements}</div>
+                  <div key={23} className="text-right text-sm md:text-xl text-gray-500">{elements}</div>
                   <div className="divider divider-horizontal p-0 m-0"></div>
               </div>
 
